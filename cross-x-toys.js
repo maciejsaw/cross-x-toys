@@ -291,7 +291,7 @@ function showElementOnList(elementName) {
 	$('[action-show-element-details="'+elementName+'"').removeClass('is-hidden');
 }
 
-function resetMarkElementAsUsed() {
+function resetMarkElementAsUsed(elementName) {
 	$('[totem-elm-name="'+elementName+'"').removeAttr('is-used');
 	$('[action-show-element-details="'+elementName+'"').removeAttr('is-used');
 }
@@ -301,7 +301,7 @@ function markElementAsUsed(elementName) {
 	$('[action-show-element-details="'+elementName+'"').attr('is-used');
 }
 
-function showAndHideUsedAndAvailableElements() {
+function showAndHideUsedAndAvailableElements(elementName) {
 	$('[totem-elm-name="'+elementName+'"').not('[is-used]').addClass('is-hidden');
 	$('[action-show-element-details="'+elementName+'"').not('[is-used]').removeClass('is-hidden');
 	$('[totem-elm-name][is-used]').removeClass('is-hidden');
