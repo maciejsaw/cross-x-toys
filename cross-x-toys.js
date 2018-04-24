@@ -299,10 +299,10 @@ function showAndHideUsedAndAvailableElements(elementName) {
 }
 
 QueryStringRouter.onParamChange('element-modal', function(value) {
-	if (typeof value !== undefined) {
+	if (typeof value !== 'undefined') {
 		$('[modal-wrapper]').removeClass('is-hidden');
-		$('[modal-id="'+value+'"').removeClass('is-hidden');
-		$('[modal-id]').not('[modal-id="'+value+'"').addClass('is-hidden');
+		$('[modal-id="'+value+'"]').removeClass('is-hidden');
+		$('[modal-id]').not('[modal-id="'+value+'"]').addClass('is-hidden');
 	} else {
 		$('[modal-wrapper]').addClass('is-hidden');
 	}
