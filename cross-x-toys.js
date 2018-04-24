@@ -308,43 +308,30 @@ function showAndHideUsedAndAvailableElements(elementName) {
 	$('[action-show-element-details][is-used]').addClass('is-hidden');
 }
 
-var elementsSlots = [
-   'elm__1',
-   'elm__2',
-   'elm__3',
-   'elm__4',
-   'elm__5',
-   'elm__6',
-];
+QueryStringRouter.setDefaultRootParams({
+	'totem': {
+		1: null,
+		2: null,
+		3: null,
+		4: null,
+		5: null,
+		6: null,
+	}
+});
 
-var usedElements = [];
-
-$.each(elementsSlots, function(index, arrayValue) {
-	QueryStringRouter.onParamChange(arrayValue, function(value) {
-
-		if (typeof value !== 'undefined') {
-		    markElementAsUsed(value);
-			showElementAndMoveToTheTopOfTotem(value);
-		}
-
-        showAndHideUsedAndAvailableElements();
-	});
+QueryStringRouter.onParamChange('totem', function(value) {
+	console.log(value);
 });
 
 $(document).on('click', '[action-show-element-details]', function(event) {
 	var elementDetailsToShow = $(this).attr('action-show-element-details');
 
-	if (typeof QueryStringRouter.getParam('elm__1') === 'undefined') {
-		QueryStringRouter.setParam('elm__1', elementDetailsToShow, {doNotCreateHistoryState: true});
-	} else if (typeof QueryStringRouter.getParam('elm__2') === 'undefined') {
-		QueryStringRouter.setParam('elm__2', elementDetailsToShow, {doNotCreateHistoryState: true});
-	} else if (typeof QueryStringRouter.getParam('elm__3') === 'undefined') {
-		QueryStringRouter.setParam('elm__3', elementDetailsToShow, {doNotCreateHistoryState: true});
-	} else if (typeof QueryStringRouter.getParam('elm__4') === 'undefined') {
-		QueryStringRouter.setParam('elm__4', elementDetailsToShow, {doNotCreateHistoryState: true});
-	} else if (typeof QueryStringRouter.getParam('elm__5') === 'undefined') {
-		QueryStringRouter.setParam('elm__5', elementDetailsToShow, {doNotCreateHistoryState: true});
-	} else if (typeof QueryStringRouter.getParam('elm__6') === 'undefined') {
-		QueryStringRouter.setParam('elm__6', elementDetailsToShow, {doNotCreateHistoryState: true});
-	}
+	showElementAndMoveToTheTopOfTotem(elementDetailsToShow);
+	hideElementFromList(elementDetailsToShow);
+});
+
+$(document).on('click', '[totem-elm-name]', function(event) {
+	var elementToHide = $(this).attr('totem-elm-name');
+	hideElement(elementToHide);
+	showElementOnList(elementToHide);
 });
