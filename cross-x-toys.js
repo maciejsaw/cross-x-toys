@@ -309,17 +309,17 @@ $.each(elementsSlots, function(index, arrayValue) {
 $(document).on('click', '[action-show-element-details]', function(event) {
 	var elementDetailsToShow = $(this).attr('action-show-element-details');
 
-	if (typeof QueryStringRouter.getParam('elm__1') === undefined) {
+	if (typeof QueryStringRouter.getParam('elm__1') === 'undefined') {
 		QueryStringRouter.setParam('elm__1', elementDetailsToShow);
-	} else if (typeof QueryStringRouter.getParam('elm__2') === undefined) {
+	} else if (typeof QueryStringRouter.getParam('elm__2') === 'undefined') {
 		QueryStringRouter.setParam('elm__2', elementDetailsToShow);
-	} else if (typeof QueryStringRouter.getParam('elm__3') === undefined) {
+	} else if (typeof QueryStringRouter.getParam('elm__3') === 'undefined') {
 		QueryStringRouter.setParam('elm__3', elementDetailsToShow);
-	} else if (typeof QueryStringRouter.getParam('elm__4') === undefined) {
+	} else if (typeof QueryStringRouter.getParam('elm__4') === 'undefined') {
 		QueryStringRouter.setParam('elm__4', elementDetailsToShow);
-	} else if (typeof QueryStringRouter.getParam('elm__5') === undefined) {
+	} else if (typeof QueryStringRouter.getParam('elm__5') === 'undefined') {
 		QueryStringRouter.setParam('elm__5', elementDetailsToShow);
-	} else if (typeof QueryStringRouter.getParam('elm__6') === undefined) {
+	} else if (typeof QueryStringRouter.getParam('elm__6') === 'undefined') {
 		QueryStringRouter.setParam('elm__6', elementDetailsToShow);
 	}
 });
