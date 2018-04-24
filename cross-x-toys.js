@@ -283,12 +283,29 @@ function hideAllTotemElements() {
 	$('[totem-elm-name]').addClass('is-hidden');
 }
 
-function hideUsedElementFromList(elementName) {
+function hideElementFromList(elementName) {
 	$('[action-show-element-details="'+elementName+'"').addClass('is-hidden');
 }
 
 function showElementOnList(elementName) {
 	$('[action-show-element-details="'+elementName+'"').removeClass('is-hidden');
+}
+
+function resetMarkElementAsUsed() {
+	$('[totem-elm-name="'+elementName+'"').removeAttr('is-used');
+	$('[action-show-element-details="'+elementName+'"').removeAttr('is-used');
+}
+
+function markElementAsUsed(elementName) {
+	$('[totem-elm-name="'+elementName+'"').attr('is-used');
+	$('[action-show-element-details="'+elementName+'"').attr('is-used');
+}
+
+function showAndHideUsedAndAvailableElements() {
+	$('[totem-elm-name="'+elementName+'"').not('[is-used]').addClass('is-hidden');
+	$('[action-show-element-details="'+elementName+'"').not('[is-used]').removeClass('is-hidden');
+	$('[totem-elm-name][is-used]').removeClass('is-hidden');
+	$('[action-show-element-details][is-used]').addClass('is-hidden');
 }
 
 var elementsSlots = [
@@ -300,17 +317,20 @@ var elementsSlots = [
    'elm__6',
 ];
 
+var usedElements = [];
+
 $.each(elementsSlots, function(index, arrayValue) {
 	QueryStringRouter.onParamChange(arrayValue, function(value) {
-		console.log(value);
+		resetMarkElementAsUsed();
+
 		if (typeof value !== 'undefined') {
-			showElementAndMoveToTheTopOfTotem(value);
-			hideUsedElementFromList(value);
-		} else {
-			hideElement(value);
-			showElementOnList(value);
+			markElementAsUsed(value);
 		}
 	});
+
+	if (index === elementsSlots.length) {
+		showAndHideUsedAndAvailableElements();
+	}
 });
 
 $(document).on('click', '[action-show-element-details]', function(event) {
