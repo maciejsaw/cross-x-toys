@@ -248,6 +248,7 @@ var QueryStringRouter = (function() {
 
 	return {
 		setParam: setParam,
+		getParam: getQueryStringParam,
 		getAllParams: getQueryStringParams,
 		setFreshParams: setFreshParams,
 		setDefaultRootParams: setDefaultRootParams,
@@ -268,8 +269,57 @@ function showElementAndMoveToTheTopOfTotem(elementName) {
 	$('[totem-elm-name="'+elementName+'"]').prependTo('[js-selector="totem__elements"]').removeClass('is-hidden');
 }
 
-QueryStringRouter.onParamChange('elm__1', function(value) {
-	if (typeof value !== 'undefined') {
-		showElementAndMoveToTheTopOfTotem(value);
+function hideElement(elementName) {
+	$('[totem-elm-name="'+elementName+'"]').addClass('is-hidden');
+}
+
+function hideAllTotemElements() {
+	$('[totem-elm-name]').addClass('is-hidden');
+}
+
+function hideUsedElementFromList(elementName) {
+	$('[action-show-element-details="'+elementName+'"').addClass('is-hidden');
+}
+
+function showElementOnList(elementName) {
+	$('[action-show-element-details="'+elementName+'"').removeClass('is-hidden');
+}
+
+var elementsSlots = [
+   'elm__1',
+   'elm__2',
+   'elm__3',
+   'elm__4',
+   'elm__5',
+   'elm__6',
+];
+
+$.each(elementsSlots, function(index, arrayValue) {
+	QueryStringRouter.onParamChange(arrayValue, function(value) {
+		if (typeof value !== 'undefined') {
+			showElementAndMoveToTheTopOfTotem(value);
+			hideUsedElementFromList(value);
+		} else {
+			hideElement(value);
+			showElementOnList(value);
+		}
+	});
+});
+
+$(document).on('click', '[action-show-element-details]', function(event) {
+	var elementDetailsToShow = $(this).attr('action-show-element-details');
+
+	if (typeof QueryStringRouter.getParam('elm__1') === undefined) {
+		QueryStringRouter.setParam('elm__1', elementDetailsToShow);
+	} else if (typeof QueryStringRouter.getParam('elm__2') === undefined) {
+		QueryStringRouter.setParam('elm__2', elementDetailsToShow);
+	} else if (typeof QueryStringRouter.getParam('elm__3') === undefined) {
+		QueryStringRouter.setParam('elm__3', elementDetailsToShow);
+	} else if (typeof QueryStringRouter.getParam('elm__4') === undefined) {
+		QueryStringRouter.setParam('elm__4', elementDetailsToShow);
+	} else if (typeof QueryStringRouter.getParam('elm__5') === undefined) {
+		QueryStringRouter.setParam('elm__5', elementDetailsToShow);
+	} else if (typeof QueryStringRouter.getParam('elm__6') === undefined) {
+		QueryStringRouter.setParam('elm__6', elementDetailsToShow);
 	}
 });
