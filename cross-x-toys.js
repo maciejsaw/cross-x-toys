@@ -151,7 +151,7 @@ var QueryStringRouter = (function() {
 			$(document).trigger('QueryStringRouter__'+key+'__paramChanged');
 		});
 
-		previousQueryStringParams = queryStringParams
+		previousQueryStringParams = queryStringParams;
 	}
 
 	//when document loads
