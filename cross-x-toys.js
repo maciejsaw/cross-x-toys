@@ -148,7 +148,7 @@ var QueryStringRouter = (function() {
 		});
 
 		$.each(queryStringParams, function(key, value) {
-			setParam(key, value);
+			$(document).trigger('QueryStringRouter__'+key+'__paramChanged');
 		});
 
 		previousQueryStringParams = queryStringParams
@@ -173,7 +173,7 @@ var QueryStringRouter = (function() {
 			window.history.pushState('','', '?'+newQueryString);
 		}
 
-		$(document).trigger('QueryStringRouter__'+key+'__paramChanged');    
+		$(window).trigger('popstate');
 	}
 
 	function removeParam(key, options) {
@@ -190,7 +190,7 @@ var QueryStringRouter = (function() {
 			window.history.pushState('','', '?'+newQueryString);
 		}
 
-		$(document).trigger('QueryStringRouter__'+key+'__paramChanged');    
+		$(window).trigger('popstate');   
 	}
 
 	function setFreshParams(newParamsObj, options) {
