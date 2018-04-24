@@ -308,6 +308,10 @@ QueryStringRouter.onParamChange('element-modal', function(value) {
 	}
 });
 
+$(document).on('click', '[action-close-modal]', function(event) {
+	QueryStringRouter.removeParam('element-modal', {doNotCreateHistoryState: true});
+});
+
 $(document).on('click', '[action-show-element-details]', function(event) {
 	var elementDetailsToShow = $(this).attr('action-show-element-details');
 	QueryStringRouter.setParam('element-modal', elementDetailsToShow);
