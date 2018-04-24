@@ -291,16 +291,6 @@ function showElementOnList(elementName) {
 	$('[action-show-element-details="'+elementName+'"').removeClass('is-hidden');
 }
 
-function resetMarkElementAsUsed() {
-	$('[totem-elm-name]').removeAttr('is-used');
-	$('[action-show-element-details]').removeAttr('is-used');
-}
-
-function markElementAsUsed(elementName) {
-	$('[totem-elm-name="'+elementName+'"').attr('is-used', 'true');
-	$('[action-show-element-details="'+elementName+'"').attr('is-used', 'true');
-}
-
 function showAndHideUsedAndAvailableElements(elementName) {
 	$('[totem-elm-name]').not('[is-used]').addClass('is-hidden');
 	$('[action-show-element-details]').not('[is-used]').removeClass('is-hidden');
@@ -308,24 +298,8 @@ function showAndHideUsedAndAvailableElements(elementName) {
 	$('[action-show-element-details][is-used]').addClass('is-hidden');
 }
 
-QueryStringRouter.setDefaultRootParams({
-	'totem': {
-		1: null,
-		2: null,
-		3: null,
-		4: null,
-		5: null,
-		6: null,
-	}
-});
-
-QueryStringRouter.onParamChange('totem', function(value) {
-	console.log(value);
-});
-
 $(document).on('click', '[action-show-element-details]', function(event) {
 	var elementDetailsToShow = $(this).attr('action-show-element-details');
-
 	showElementAndMoveToTheTopOfTotem(elementDetailsToShow);
 	hideElementFromList(elementDetailsToShow);
 });
