@@ -144,6 +144,7 @@ var QueryStringRouter = (function() {
 		$.each(previousQueryStringParams, function(key, value) {
 			if (typeof queryStringParams[key] == 'undefined') {
 				$(document).trigger('QueryStringRouter__'+key+'__paramChanged');
+				console.log('param '+key+' was removed');
 			}
 		});
 
@@ -163,34 +164,39 @@ var QueryStringRouter = (function() {
 
 	function setParam(key, value, options) {
 		var queryStringParams = getQueryStringParams();
-		queryStringParams[key] = value;
-		var newQueryString = $.param(queryStringParams);
 
-		options = options || {};
-		if (options.doNotCreateHistoryState === true) {
-			window.history.replaceState('','', '?'+newQueryString);
-		} else {
-			window.history.pushState('','', '?'+newQueryString);
+		if (queryStringParams[key] !== value) {
+			queryStringParams[key] = value;
+			var newQueryString = $.param(queryStringParams);
+
+			options = options || {};
+			if (options.doNotCreateHistoryState === true) {
+				window.history.replaceState('','', '?'+newQueryString);
+			} else {
+				window.history.pushState('','', '?'+newQueryString);
+			}
+
+			$(window).trigger('popstate');
 		}
-
-		$(window).trigger('popstate');
+		
 	}
 
 	function removeParam(key, options) {
 		var queryStringParams = getQueryStringParams();
 		if (typeof queryStringParams[key] !== 'undefined') {
 			delete queryStringParams[key];
-		}
-		var newQueryString = $.param(queryStringParams);
 
-		options = options || {};
-		if (options.doNotCreateHistoryState === true) {
-			window.history.replaceState('','', '?'+newQueryString);
-		} else {
-			window.history.pushState('','', '?'+newQueryString);
-		}
+			var newQueryString = $.param(queryStringParams);
 
-		$(window).trigger('popstate');   
+			options = options || {};
+			if (options.doNotCreateHistoryState === true) {
+				window.history.replaceState('','', '?'+newQueryString);
+			} else {
+				window.history.pushState('','', '?'+newQueryString);
+			}
+
+			$(window).trigger('popstate');  
+		}
 	}
 
 	function setFreshParams(newParamsObj, options) {
@@ -220,7 +226,7 @@ var QueryStringRouter = (function() {
 		}
 		actionsOnParamChange[key].push(actionFunction);
 
-		//when the onParamChanged is defined, also retrigger the state
+		//when the onParamChanged is being defined, also retrigger the state
 		retriggerOnParamChange(key);
 	}
 
@@ -296,6 +302,7 @@ var elementsSlots = [
 
 $.each(elementsSlots, function(index, arrayValue) {
 	QueryStringRouter.onParamChange(arrayValue, function(value) {
+		console.log(value);
 		if (typeof value !== 'undefined') {
 			showElementAndMoveToTheTopOfTotem(value);
 			hideUsedElementFromList(value);
