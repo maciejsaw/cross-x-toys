@@ -308,6 +308,8 @@ QueryStringRouter.onParamChange('element-modal', function(value) {
 	}
 });
 
+var myTotemElements = [];
+
 $(document).on('click', '[action-close-modal]', function(event) {
 	QueryStringRouter.removeParam('element-modal', {doNotCreateHistoryState: true});
 });
@@ -321,10 +323,14 @@ $(document).on('click', '[totem-elm-name]', function(event) {
 	var elementToHide = $(this).attr('totem-elm-name');
 	hideElement(elementToHide);
 	showElementOnList(elementToHide);
+	if (myTotemElements.indexOf(elementToHide) > -1) {
+		myTotemElements.splice(myTotemElements.indexOf(elementToHide, 1);
+	}
 });
 
 $(document).on('click', '[action-confirm-element-choice]', function(event) {
-	var elementDetailsToShow = $(this).attr('action-confirm-element-choice');
-	showElementAndMoveToTheTopOfTotem(elementDetailsToShow);
-	hideElementFromList(elementDetailsToShow);
+	var elementToShow = $(this).attr('action-confirm-element-choice');
+	showElementAndMoveToTheTopOfTotem(elementToShow);
+	hideElementFromList(elementToShow);
+	myTotemElements.push(elementToShow);
 });
