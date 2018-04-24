@@ -298,14 +298,29 @@ function showAndHideUsedAndAvailableElements(elementName) {
 	$('[action-show-element-details][is-used]').addClass('is-hidden');
 }
 
+QueryStringRouter.onParamChange('element-modal', function(value) {
+	if (typeof value !== undefined) {
+		$('[modal-wrapper]').removeClass('is-hidden');
+		$('[modal-id="'+value+'"').removeClass('is-hidden');
+		$('[modal-id]').not('[modal-id="'+value+'"').addClass('is-hidden');
+	} else {
+		$('[modal-wrapper]').addClass('is-hidden');
+	}
+});
+
 $(document).on('click', '[action-show-element-details]', function(event) {
 	var elementDetailsToShow = $(this).attr('action-show-element-details');
-	showElementAndMoveToTheTopOfTotem(elementDetailsToShow);
-	hideElementFromList(elementDetailsToShow);
+	QueryStringRouter.setParam('element-modal', elementDetailsToShow);
 });
 
 $(document).on('click', '[totem-elm-name]', function(event) {
 	var elementToHide = $(this).attr('totem-elm-name');
 	hideElement(elementToHide);
 	showElementOnList(elementToHide);
+});
+
+$(document).on('click', '[action-confirm-element-choice]', function(event) {
+	var elementDetailsToShow = $(this).attr('action-confirm-element-choice');
+	showElementAndMoveToTheTopOfTotem(elementDetailsToShow);
+	hideElementFromList(elementDetailsToShow);
 });
