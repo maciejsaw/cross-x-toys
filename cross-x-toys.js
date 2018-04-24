@@ -143,7 +143,7 @@ var QueryStringRouter = (function() {
 		//check what previous params are not present in the new query string
 		$.each(previousQueryStringParams, function(key, value) {
 			if (typeof queryStringParams[key] == 'undefined') {
-				setParam(key, undefined);
+				$(document).trigger('QueryStringRouter__'+key+'__paramChanged');
 			}
 		});
 
