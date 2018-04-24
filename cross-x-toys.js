@@ -324,7 +324,7 @@ $(document).on('click', '[totem-elm-name]', function(event) {
 	hideElement(elementToHide);
 	showElementOnList(elementToHide);
 	if (myTotemElements.indexOf(elementToHide) > -1) {
-		myTotemElements.splice(myTotemElements.indexOf(elementToHide, 1);
+		myTotemElements.splice(myTotemElements.indexOf(elementToHide), 1);
 	}
 });
 
