@@ -297,8 +297,8 @@ function resetMarkElementAsUsed(elementName) {
 }
 
 function markElementAsUsed(elementName) {
-	$('[totem-elm-name="'+elementName+'"').attr('is-used');
-	$('[action-show-element-details="'+elementName+'"').attr('is-used');
+	$('[totem-elm-name="'+elementName+'"').attr('is-used', 'true');
+	$('[action-show-element-details="'+elementName+'"').attr('is-used', 'true');
 }
 
 function showAndHideUsedAndAvailableElements(elementName) {
