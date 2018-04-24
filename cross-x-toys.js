@@ -263,3 +263,13 @@ var QueryStringRouter = (function() {
 
 })();
 
+//------------- START MAIN APP ------------------
+function showElementAndMoveToTheTopOfTotem(elementName) {
+	$('[totem-elm-name="'+elementName+'"]').prependTo('[js-selector="totem__elements"]').removeClass('is-hidden');
+}
+
+QueryStringRouter.onParamChange('elm__1', function(value) {
+	if (typeof value !== 'undefined') {
+		showElementAndMoveToTheTopOfTotem(value);
+	}
+});
