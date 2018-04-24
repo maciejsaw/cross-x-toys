@@ -291,9 +291,9 @@ function showElementOnList(elementName) {
 	$('[action-show-element-details="'+elementName+'"').removeClass('is-hidden');
 }
 
-function resetMarkElementAsUsed(elementName) {
-	$('[totem-elm-name="'+elementName+'"').removeAttr('is-used');
-	$('[action-show-element-details="'+elementName+'"').removeAttr('is-used');
+function resetMarkElementAsUsed() {
+	$('[totem-elm-name]').removeAttr('is-used');
+	$('[action-show-element-details]').removeAttr('is-used');
 }
 
 function markElementAsUsed(elementName) {
@@ -302,8 +302,8 @@ function markElementAsUsed(elementName) {
 }
 
 function showAndHideUsedAndAvailableElements(elementName) {
-	$('[totem-elm-name="'+elementName+'"').not('[is-used]').addClass('is-hidden');
-	$('[action-show-element-details="'+elementName+'"').not('[is-used]').removeClass('is-hidden');
+	$('[totem-elm-name]').not('[is-used]').addClass('is-hidden');
+	$('[action-show-element-details]').not('[is-used]').removeClass('is-hidden');
 	$('[totem-elm-name][is-used]').removeClass('is-hidden');
 	$('[action-show-element-details][is-used]').addClass('is-hidden');
 }
@@ -321,32 +321,30 @@ var usedElements = [];
 
 $.each(elementsSlots, function(index, arrayValue) {
 	QueryStringRouter.onParamChange(arrayValue, function(value) {
-		resetMarkElementAsUsed();
 
 		if (typeof value !== 'undefined') {
-			markElementAsUsed(value);
+		    markElementAsUsed(value);
+			showElementAndMoveToTheTopOfTotem(value);
 		}
-	});
 
-	if (index === elementsSlots.length) {
-		showAndHideUsedAndAvailableElements();
-	}
+        showAndHideUsedAndAvailableElements();
+	});
 });
 
 $(document).on('click', '[action-show-element-details]', function(event) {
 	var elementDetailsToShow = $(this).attr('action-show-element-details');
 
 	if (typeof QueryStringRouter.getParam('elm__1') === 'undefined') {
-		QueryStringRouter.setParam('elm__1', elementDetailsToShow);
+		QueryStringRouter.setParam('elm__1', elementDetailsToShow, {doNotCreateHistoryState: true});
 	} else if (typeof QueryStringRouter.getParam('elm__2') === 'undefined') {
-		QueryStringRouter.setParam('elm__2', elementDetailsToShow);
+		QueryStringRouter.setParam('elm__2', elementDetailsToShow, {doNotCreateHistoryState: true});
 	} else if (typeof QueryStringRouter.getParam('elm__3') === 'undefined') {
-		QueryStringRouter.setParam('elm__3', elementDetailsToShow);
+		QueryStringRouter.setParam('elm__3', elementDetailsToShow, {doNotCreateHistoryState: true});
 	} else if (typeof QueryStringRouter.getParam('elm__4') === 'undefined') {
-		QueryStringRouter.setParam('elm__4', elementDetailsToShow);
+		QueryStringRouter.setParam('elm__4', elementDetailsToShow, {doNotCreateHistoryState: true});
 	} else if (typeof QueryStringRouter.getParam('elm__5') === 'undefined') {
-		QueryStringRouter.setParam('elm__5', elementDetailsToShow);
+		QueryStringRouter.setParam('elm__5', elementDetailsToShow, {doNotCreateHistoryState: true});
 	} else if (typeof QueryStringRouter.getParam('elm__6') === 'undefined') {
-		QueryStringRouter.setParam('elm__6', elementDetailsToShow);
+		QueryStringRouter.setParam('elm__6', elementDetailsToShow, {doNotCreateHistoryState: true});
 	}
 });
