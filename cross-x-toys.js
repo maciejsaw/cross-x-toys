@@ -272,7 +272,7 @@ var QueryStringRouter = (function() {
 
 //------------- START MAIN APP ------------------
 function showElementAndMoveToTheTopOfTotem(elementName) {
-	$('[totem-elm-name="'+elementName+'"]').prependTo('[js-selector="totem__elements"]').removeClass('is-hidden');
+	$('[totem-elm-name="'+elementName+'"]').appendTo('[js-selector="totem__elements"]').removeClass('is-hidden');
 }
 
 function hideElement(elementName) {
