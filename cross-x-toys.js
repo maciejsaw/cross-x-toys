@@ -284,11 +284,11 @@ function hideAllTotemElements() {
 }
 
 function hideElementFromList(elementName) {
-	$('[action-show-element-details="'+elementName+'"').addClass('is-hidden');
+	$('[action-show-element-details="'+elementName+'"]').addClass('is-hidden');
 }
 
 function showElementOnList(elementName) {
-	$('[action-show-element-details="'+elementName+'"').removeClass('is-hidden');
+	$('[action-show-element-details="'+elementName+'"]').removeClass('is-hidden');
 }
 
 function showAndHideUsedAndAvailableElements(elementName) {
