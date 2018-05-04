@@ -335,10 +335,10 @@ $(document).on('click', '[action-confirm-element-choice]', function(event) {
 	myTotemElements.push(elementToShow);
 });
 
-QueryStringRouter.setParam('tab', 'about');
+QueryStringRouter.setParam('tab', 'about', {doNotCreateHistoryState: true});
 
 $(document).on('click', '[action-create-totem]', function() {
-	QueryStringRouter.setParam('tab', 'create-totem', {doNotCreateHistoryState: true});
+	QueryStringRouter.setParam('tab', 'create-totem');
 });
 
 $(document).on('click', '[action-set-nav-tab]', function() {
