@@ -335,6 +335,10 @@ $(document).on('click', '[action-confirm-element-choice]', function(event) {
 	myTotemElements.push(elementToShow);
 });
 
+QueryStringRouter.setDefaultRootParams({
+	tab: 'about',
+});
+
 $(document).on('click', '[action-create-totem]', function() {
 	QueryStringRouter.setParam('tab', 'create-totem');
 });
@@ -350,3 +354,4 @@ QueryStringRouter.onParamChange('tab', function(value) {
 	$('[action-set-nav-tab]').not('[action-set-nav-tab="'+value+'"]').removeClass('is-current');
 	$('[action-set-nav-tab="'+value+'"]').addClass('is-current');
 });
+
