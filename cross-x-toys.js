@@ -338,7 +338,7 @@ $(document).on('click', '[action-confirm-element-choice]', function(event) {
 QueryStringRouter.setParam('tab', 'about');
 
 $(document).on('click', '[action-create-totem]', function() {
-	QueryStringRouter.setParam('tab', 'create-totem');
+	QueryStringRouter.setParam('tab', 'create-totem', {doNotCreateHistoryState: true});
 });
 
 $(document).on('click', '[action-set-nav-tab]', function() {
