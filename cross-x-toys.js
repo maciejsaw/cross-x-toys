@@ -335,9 +335,7 @@ $(document).on('click', '[action-confirm-element-choice]', function(event) {
 	myTotemElements.push(elementToShow);
 });
 
-QueryStringRouter.setDefaultRootParams({
-	tab: 'about',
-});
+QueryStringRouter.setParam('tab', 'about');
 
 $(document).on('click', '[action-create-totem]', function() {
 	QueryStringRouter.setParam('tab', 'create-totem');
