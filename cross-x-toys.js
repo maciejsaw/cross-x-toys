@@ -334,3 +334,19 @@ $(document).on('click', '[action-confirm-element-choice]', function(event) {
 	hideElementFromList(elementToShow);
 	myTotemElements.push(elementToShow);
 });
+
+$(document).on('click', '[action-create-totem]', function() {
+	QueryStringRouter.setParam('tab', 'create-totem');
+});
+
+$(document).on('click', '[action-set-nav-tab]', function() {
+	var tabToSet = $(this).attr('action-set-nav-tab');
+	QueryStringRouter.setParam('tab', tabToSet);
+});
+
+QueryStringRouter.onParamChange('tab', function(value) {
+	$('[tab-id]').not('[tab-id="'+value+'"]').addClass('is-hidden');
+	$('[tab-id="'+value+'"]').removeClass('is-hidden');
+	$('[action-set-nav-tab]').not('[action-set-nav-tab="'+value+'"]').removeClass('is-current');
+	$('[action-set-nav-tab="'+value+'"]').addClass('is-current');
+});
